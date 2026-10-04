@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>CafeQueue – Order Board</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<aside class="sidebar">
+  <div class="brand">☕ CafeQueue</div>
+  <nav>
+    <button class="nav-btn active" data-view="board">Order Board</button>
+    <button class="nav-btn" data-view="menu">Menu</button>
+  </nav>
+</aside>
+
+<main>
+  <section id="board" class="view active">
+    <div class="head">
+      <h1>Order Board</h1>
+      <button class="btn" id="addOrderBtn">+ New Order</button>
+    </div>
+    <div class="cards" id="stats"></div>
+    <input type="search" id="searchOrder" placeholder="Search by table or order #…" aria-label="Search orders" class="search-bar">
+
+    <div class="board">
+      <div class="col" data-stage="New"><h2>New <span id="cNew" class="count"></span></h2><div class="col-body" id="colNew"></div></div>
+      <div class="col" data-stage="Preparing"><h2>Preparing <span id="cPreparing" class="count"></span></h2><div class="col-body" id="colPreparing"></div></div>
+      <div class="col" data-stage="Ready"><h2>Ready <span id="cReady" class="count"></span></h2><div class="col-body" id="colReady"></div></div>
+      <div class="col" data-stage="Completed"><h2>Completed <span id="cCompleted" class="count"></span></h2><div class="col-body" id="colCompleted"></div></div>
+    </div>
+  </section>
+
+  <section id="menu" class="view">
+    <div class="head"><h1>Menu</h1><button class="btn" id="addItemBtn">+ Add Item</button></div>
+    <div class="menu-grid" id="menuGrid"></div>
+  </section>
+</main>
+
+<!-- ORDER MODAL -->
+<div class="modal" id="orderModal" hidden>
+  <form class="modal-box" id="orderForm">
+    <h2>New Order</h2>
+    <label>Table / Customer <input id="o_table" required maxlength="30" placeholder="Table 4 or name"></label>
+    <label>Items</label>
+    <div id="itemPicker" class="item-picker"></div>
+    <p class="muted">Order total: <strong id="o_total">₱0.00</strong></p>
+    <div class="actions">
+      <button type="button" class="btn ghost" data-close>Cancel</button>
+      <button class="btn">Place order</button>
+    </div>
+  </form>
+</div>
+
+<!-- MENU ITEM MODAL -->
+<div class="modal" id="itemModal" hidden>
+  <form class="modal-box" id="itemForm">
+    <h2 id="itemTitle">Add Item</h2>
+    <label>Item name <input id="i_name" required maxlength="40"></label>
+    <div class="row">
+      <label>Category <select id="i_category"><option>Coffee</option><option>Non-Coffee</option><option>Pastry</option><option>Snack</option></select></label>
+      <label>Price <input id="i_price" type="number" min="0" step="0.01" required></label>
+    </div>
+    <div class="actions">
+      <button type="button" class="btn ghost" data-close>Cancel</button>
+      <button class="btn">Save item</button>
+    </div>
+  </form>
+</div>
+
+<div id="toast" role="status"></div>
+<script src="script.js"></script>
+</body>
+</html>
